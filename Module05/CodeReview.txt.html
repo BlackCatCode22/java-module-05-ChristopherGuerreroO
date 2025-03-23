@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>CodeReview.txt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CodeReview.txt</font>
+</center></td></tr></table>
+<pre><span class="s0">Code Review</span>
+
+<span class="s0">I reviewed the loadAnimals() method because it was a central part of our program and had a few issues that needed improvement.</span>
+
+<span class="s0">Changes Made:</span>
+<span class="s0">- Fixed constructor argument mismatches for Animal subclasses (Hyena, Lion, Tiger, Bear)</span>
+<span class="s0">- Improved the error handling when files were not found</span>
+<span class="s0">- Used better naming for variables like 'parts' to make the code clearer</span>
+<span class="s0">- Made sure to use File.separator for cross-platform compatibility</span>
+
+<span class="s0">Reason for Changes:</span>
+<span class="s0">These improvements made the method more reliable, readable, and aligned with OOP practices.</span>
+
+<span class="s0">Before:</span>
+<span class="s0">Hyena hyena = new Hyena(name, age, type);</span>
+
+<span class="s0">After:</span>
+<span class="s0">Hyena hyena = new Hyena(name, age, isAlpha);</span>
+</pre>
+</body>
+</html>

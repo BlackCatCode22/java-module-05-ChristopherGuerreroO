@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Module05_Activites.txt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Module05_Activites.txt</font>
+</center></td></tr></table>
+<pre><span class="s0">Design Document: Zookeeper's Challenge (Midterm Project)</span>
+
+<span class="s0">1. Objective:</span>
+<span class="s0">Build a Java application that reads animal data from input files, processes it using Object-Oriented Programming (OOP) principles, and generates an organized report on the animals in the zoo.</span>
+
+<span class="s0">2. Main Components:</span>
+
+<span class="s0">Animal (Superclass): Contains shared attributes (name, age, species) and common methods (getters, setters, toString).</span>
+
+<span class="s0">Subclasses: Hyena, Lion, Tiger, Bear - each may include additional attributes (e.g., isAlpha for Lion, hasStripes for Tiger, etc.).</span>
+
+<span class="s0">ZooManager (Main Program): Manages data reading, object creation, and report writing.</span>
+
+<span class="s0">3. Data Structures:</span>
+
+<span class="s0">ArrayList: To store all Animal instances regardless of species.</span>
+
+<span class="s0">HashMap&lt;String, Integer&gt;: To count how many animals of each species are processed.</span>
+
+<span class="s0">4. File Input:</span>
+
+<span class="s0">arrivingAnimals.txt: Contains species and age, e.g., &quot;Hyena, 4&quot;</span>
+
+<span class="s0">animalNames.txt: Contains random names for animals, one per line.</span>
+
+<span class="s0">5. Program Flow:</span>
+
+<span class="s0">Read all animal names into a queue (so each name is used once).</span>
+
+<span class="s0">Read arriving animals line-by-line.</span>
+
+<span class="s0">For each line:</span>
+
+<span class="s0">Parse the species and age.</span>
+
+<span class="s0">Get the next available name from the queue.</span>
+
+<span class="s0">Create the appropriate subclass object using the name, age, and species.</span>
+
+<span class="s0">Add the object to the ArrayList.</span>
+
+<span class="s0">Update the HashMap counter.</span>
+
+<span class="s0">Write the report:</span>
+
+<span class="s0">List each animal's info, grouped by species.</span>
+
+<span class="s0">At the end, display a total count per species.</span>
+
+<span class="s0">6. Extra Features (Optional):</span>
+
+<span class="s0">Sort animals by age within each species.</span>
+
+<span class="s0">Track additional info per subclass (e.g., boolean attributes).</span>
+
+<span class="s0">7. File Output:</span>
+
+<span class="s0">newAnimals.txt: Final report including formatted animal data and summary.</span>
+
+<span class="s0">8. Notes:</span>
+
+<span class="s0">Ensure exception handling for missing files or parse errors.</span>
+
+<span class="s0">Follow Java naming and formatting conventions.</span>
+
+<span class="s0">Keep code modular and commented.</span></pre>
+</body>
+</html>

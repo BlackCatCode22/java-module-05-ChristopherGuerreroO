@@ -1,0 +1,66 @@
+Design Document: Zookeeper's Challenge (Midterm Project)
+
+1. Objective:
+Build a Java application that reads animal data from input files, processes it using Object-Oriented Programming (OOP) principles, and generates an organized report on the animals in the zoo.
+
+2. Main Components:
+
+Animal (Superclass): Contains shared attributes (name, age, species) and common methods (getters, setters, toString).
+
+Subclasses: Hyena, Lion, Tiger, Bear - each may include additional attributes (e.g., isAlpha for Lion, hasStripes for Tiger, etc.).
+
+ZooManager (Main Program): Manages data reading, object creation, and report writing.
+
+3. Data Structures:
+
+ArrayList: To store all Animal instances regardless of species.
+
+HashMap<String, Integer>: To count how many animals of each species are processed.
+
+4. File Input:
+
+arrivingAnimals.txt: Contains species and age, e.g., "Hyena, 4"
+
+animalNames.txt: Contains random names for animals, one per line.
+
+5. Program Flow:
+
+Read all animal names into a queue (so each name is used once).
+
+Read arriving animals line-by-line.
+
+For each line:
+
+Parse the species and age.
+
+Get the next available name from the queue.
+
+Create the appropriate subclass object using the name, age, and species.
+
+Add the object to the ArrayList.
+
+Update the HashMap counter.
+
+Write the report:
+
+List each animal's info, grouped by species.
+
+At the end, display a total count per species.
+
+6. Extra Features (Optional):
+
+Sort animals by age within each species.
+
+Track additional info per subclass (e.g., boolean attributes).
+
+7. File Output:
+
+newAnimals.txt: Final report including formatted animal data and summary.
+
+8. Notes:
+
+Ensure exception handling for missing files or parse errors.
+
+Follow Java naming and formatting conventions.
+
+Keep code modular and commented.

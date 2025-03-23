@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>CodeReview.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CodeReview.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Zoo</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">ZooManager </span><span class="s2">{</span>
+
+    <span class="s0">private static final </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Animal</span><span class="s2">&gt; </span><span class="s1">animalList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private static final </span><span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">speciesCount </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public static void </span><span class="s1">loadAnimals</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// Use resource path for reading files</span>
+            <span class="s1">InputStream animalStream </span><span class="s2">= </span><span class="s1">ZooManager</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResourceAsStream</span><span class="s2">(</span><span class="s4">&quot;/resources/arrivingAnimals.txt&quot;</span><span class="s2">);</span>
+            <span class="s1">InputStream nameStream </span><span class="s2">= </span><span class="s1">ZooManager</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResourceAsStream</span><span class="s2">(</span><span class="s4">&quot;/resources/animalNames.txt&quot;</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">animalStream </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">nameStream </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;One or more input files not found.&quot;</span><span class="s2">);</span>
+                <span class="s0">return</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s1">Scanner animalScanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">animalStream</span><span class="s2">);</span>
+            <span class="s1">Scanner nameScanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">nameStream</span><span class="s2">);</span>
+
+            <span class="s0">while </span><span class="s2">(</span><span class="s1">animalScanner</span><span class="s2">.</span><span class="s1">hasNextLine</span><span class="s2">() &amp;&amp; </span><span class="s1">nameScanner</span><span class="s2">.</span><span class="s1">hasNextLine</span><span class="s2">()) {</span>
+                <span class="s1">String line </span><span class="s2">= </span><span class="s1">animalScanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+                <span class="s1">String</span><span class="s2">[] </span><span class="s1">parts </span><span class="s2">= </span><span class="s1">line</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot;,&quot;</span><span class="s2">);</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">parts</span><span class="s2">.</span><span class="s1">length </span><span class="s2">!= </span><span class="s5">3</span><span class="s2">) </span><span class="s0">continue</span><span class="s2">;  </span><span class="s3">// Skip malformed lines</span>
+
+                <span class="s1">String species </span><span class="s2">= </span><span class="s1">parts</span><span class="s2">[</span><span class="s5">0</span><span class="s2">].</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s0">int </span><span class="s1">age </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">parts</span><span class="s2">[</span><span class="s5">1</span><span class="s2">].</span><span class="s1">trim</span><span class="s2">());</span>
+                <span class="s0">boolean </span><span class="s1">specialAttribute </span><span class="s2">= </span><span class="s1">Boolean</span><span class="s2">.</span><span class="s1">parseBoolean</span><span class="s2">(</span><span class="s1">parts</span><span class="s2">[</span><span class="s5">2</span><span class="s2">].</span><span class="s1">trim</span><span class="s2">()); </span><span class="s3">// isAlpha or isAggressive</span>
+
+                <span class="s1">String name </span><span class="s2">= </span><span class="s1">nameScanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+                <span class="s1">Animal animal </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+
+                <span class="s0">switch </span><span class="s2">(</span><span class="s1">species</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">()) {</span>
+                    <span class="s0">case </span><span class="s4">&quot;hyena&quot; </span><span class="s1">-&gt; animal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Hyena</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">age</span><span class="s2">, </span><span class="s1">specialAttribute</span><span class="s2">);</span>
+                    <span class="s0">case </span><span class="s4">&quot;lion&quot; </span><span class="s1">-&gt; animal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Lion</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">age</span><span class="s2">, </span><span class="s1">specialAttribute</span><span class="s2">);</span>
+                    <span class="s0">case </span><span class="s4">&quot;tiger&quot; </span><span class="s1">-&gt; animal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Tiger</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">age</span><span class="s2">, </span><span class="s1">specialAttribute</span><span class="s2">);</span>
+                    <span class="s0">case </span><span class="s4">&quot;bear&quot; </span><span class="s1">-&gt; animal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Bear</span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">age</span><span class="s2">, </span><span class="s1">specialAttribute</span><span class="s2">);</span>
+                <span class="s2">}</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">animal </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s1">animalList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">animal</span><span class="s2">);</span>
+                    <span class="s1">speciesCount</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">species</span><span class="s2">, </span><span class="s1">speciesCount</span><span class="s2">.</span><span class="s1">getOrDefault</span><span class="s2">(</span><span class="s1">species</span><span class="s2">, </span><span class="s5">0</span><span class="s2">) + </span><span class="s5">1</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+            <span class="s1">animalScanner</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+            <span class="s1">nameScanner</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+
+            <span class="s1">generateReport</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Error during file reading: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static void </span><span class="s1">generateReport</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">PrintWriter writer </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PrintWriter</span><span class="s2">(</span><span class="s4">&quot;newAnimals.txt&quot;</span><span class="s2">)) {</span>
+            <span class="s1">writer</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Zoo Animal Report:&quot;</span><span class="s2">);</span>
+            <span class="s1">writer</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;------------------&quot;</span><span class="s2">);</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">Animal animal </span><span class="s2">: </span><span class="s1">animalList</span><span class="s2">) {</span>
+                <span class="s1">writer</span><span class="s2">.</span><span class="s1">printf</span><span class="s2">(</span><span class="s4">&quot;Species: %s | Name: %s | Age: %d%n&quot;</span><span class="s2">,</span>
+                        <span class="s1">animal</span><span class="s2">.</span><span class="s1">getSpecies</span><span class="s2">(), </span><span class="s1">animal</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">(), </span><span class="s1">animal</span><span class="s2">.</span><span class="s1">getAge</span><span class="s2">());</span>
+            <span class="s2">}</span>
+
+            <span class="s1">writer</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">Total Count per Species:&quot;</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">Map</span><span class="s2">.</span><span class="s1">Entry</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">entry </span><span class="s2">: </span><span class="s1">speciesCount</span><span class="s2">.</span><span class="s1">entrySet</span><span class="s2">()) {</span>
+                <span class="s1">writer</span><span class="s2">.</span><span class="s1">printf</span><span class="s2">(</span><span class="s4">&quot;%s: %d%n&quot;</span><span class="s2">, </span><span class="s1">entry</span><span class="s2">.</span><span class="s1">getKey</span><span class="s2">(), </span><span class="s1">entry</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">());</span>
+            <span class="s2">}</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Report generated successfully.&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Failed to write report: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

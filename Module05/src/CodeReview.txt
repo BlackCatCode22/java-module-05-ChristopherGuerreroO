@@ -1,0 +1,18 @@
+Code Review
+
+I reviewed the loadAnimals() method because it was a central part of our program and had a few issues that needed improvement.
+
+Changes Made:
+- Fixed constructor argument mismatches for Animal subclasses (Hyena, Lion, Tiger, Bear)
+- Improved the error handling when files were not found
+- Used better naming for variables like 'parts' to make the code clearer
+- Made sure to use File.separator for cross-platform compatibility
+
+Reason for Changes:
+These improvements made the method more reliable, readable, and aligned with OOP practices.
+
+Before:
+Hyena hyena = new Hyena(name, age, type);
+
+After:
+Hyena hyena = new Hyena(name, age, isAlpha);
